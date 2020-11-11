@@ -37,8 +37,8 @@ func NewClient(accessToken string, workspace string) *Client {
 	}
 }
 
-// NewClient creates a new Segment Config API client.
-func NewCustomClient(accessToken string, workspace string, *http.Client c) *Client {
+// NewCustomClient creates a new Segment Config API client with a custom http client
+func NewCustomClient(accessToken string, workspace string, c *http.Client) *Client {
 	return &Client{
 		baseURL:     defaultBaseURL,
 		apiVersion:  apiVersion,
