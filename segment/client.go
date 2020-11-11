@@ -78,6 +78,7 @@ func (c *Client) doRequest(method, endpoint string, data interface{}) ([]byte, e
 	}
 	defer resp.Body.Close()
 
+	body, err := ioutil.ReadAll(resp.Body)
 	// Check that the response status code was OK.
 	switch resp.StatusCode {
 	case http.StatusOK:
@@ -94,7 +95,6 @@ func (c *Client) doRequest(method, endpoint string, data interface{}) ([]byte, e
 		return nil, fmt.Errorf("bad response code: %d", resp.StatusCode)
 	}
 
-	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, errors.Wrap(err, fmt.Sprintf("decoding response from %s request to %s failed: body -> %s\n", method, uri, string(body)))
 	}
