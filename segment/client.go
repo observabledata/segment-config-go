@@ -37,6 +37,17 @@ func NewClient(accessToken string, workspace string) *Client {
 	}
 }
 
+// NewClient creates a new Segment Config API client.
+func NewCustomClient(accessToken string, workspace string, *http.Client c) *Client {
+	return &Client{
+		baseURL:     defaultBaseURL,
+		apiVersion:  apiVersion,
+		accessToken: accessToken,
+		workspace:   workspace,
+		client:      c,
+	}
+}
+
 func (c *Client) doRequest(method, endpoint string, data interface{}) ([]byte, error) {
 
 	// Encode data if we are passed an object.
